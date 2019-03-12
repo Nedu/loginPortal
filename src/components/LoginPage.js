@@ -5,11 +5,12 @@ import { connect } from 'react-redux';
 
 import { userActions } from '../actions';
 
-export class LoginPage extends Component {
+class LoginPage extends Component {
     constructor(props) {
         super(props);
 
         // reset login status
+        this.props.dispatch(userActions.logout());
 
         this.state = {
             username: '',
@@ -22,21 +23,30 @@ export class LoginPage extends Component {
     }
 
     handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     }
 
     handleSubmit(e) {
-        
+        e.preventDefault();
+        this.setState({ submitted: true });
+        const { username, password } = this.state;
+        const { dispatch } = this.props;
+        if (username && password) {
+            dispatch(userActions.login(username, password));
+        }
     }
 
     render() {
+        const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
         return (
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
-                <form name="form">
+                <form name="form" onSubmit={this.handleSubmit}>
                     <div className={'form-group' + (submitted && !username ? ' has-error' : '')}>
                         <label htmlFor="username">Username</label>
-                        <input type="text" className="form-control username" name="username" />
+                        <input type="text" onChange={this.handleChange} value={username} className="form-control username" name="username" />
                         {submitted && !username &&
                             <div className="help-block">Username is required</div>
                         }
@@ -50,6 +60,10 @@ export class LoginPage extends Component {
                     </div>
                     <div className="form-group">
                         <button className="btn btn-primary">Login</button>
+                        {loggingIn &&
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="13%"  />
+                        }
+                        <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
                 </form>
             </div>
@@ -58,7 +72,12 @@ export class LoginPage extends Component {
 }
 
 function mapStateToProps(state) {
-
+    const { authentication : { loggingIn } } = state;
+    return {
+        loggingIn,
+    };
 }
+
+export default connect(mapStateToProps)(LoginPage);
 
 export { LoginPage as TestLoginPage };
