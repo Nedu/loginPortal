@@ -8,6 +8,7 @@ import { alertActions } from './actions';
 import { HomePage } from './components/HomePage';
 import LoginPage from './components/LoginPage';
 import RegisterPage from './components/RegisterPage';
+import './styles/styles.css';
 
 class App extends React.Component {
     constructor(props) {
