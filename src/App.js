@@ -22,7 +22,16 @@ export class App extends React.Component {
         return (
               <div className="container">
                   <div className="col-sm-8 col-sm-offset-2">
-                              <LoginPage />
+                    {
+                        alert && alert.message ? <div className = {`alert ${alert.type}`}> {alert.message} </div> : null
+                    }
+                    <Router history={history}>
+                    <div>
+                        <PrivateRoute exact path="/" component={HomePage} />
+                        <Route path="/login" component={LoginPage} />
+                        <Route path="/register" component={RegisterPage} />
+                    </div>
+                    </Router>
                   </div>
               </div>
         );
