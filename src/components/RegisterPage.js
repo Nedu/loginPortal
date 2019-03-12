@@ -44,7 +44,7 @@ export class RegisterPage extends Component {
                     </div>
                     <div className={'form-group' + (submitted && !user.password ? ' has-error' : '')}>
                         <label htmlFor="password">Password</label>
-                        <input type="password" className="form-control" name="password"/>
+                        <input type="password" className="form-control password" value={user.password} onChange={this.handleChange} name="password"/>
                         {submitted && !user.password &&
                             <div className="help-block">Password is required</div>
                         }
