@@ -68,7 +68,7 @@ class RegisterPage extends Component {
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>
                         {registering &&
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="13%"  />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="13%" alt="register spinner" />
                         }
                         <Link to="/login" className="btn btn-link">Cancel</Link>
                     </div>

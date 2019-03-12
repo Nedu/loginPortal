@@ -61,7 +61,7 @@ class LoginPage extends Component {
                     <div className="form-group">
                         <button className="btn btn-primary">Login</button>
                         {loggingIn &&
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="13%"  />
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" width="13%" alt="login spinner"  />
                         }
                         <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
